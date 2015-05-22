@@ -76,13 +76,13 @@
  
          <section>
 					<section id="CoreOS">
-						<h2>Présentation de <img src="images/CoreOS.svg" style="background:none; border:none; box-shadow:none; width:50%;" /></h2>
+						<h2>Présentation de <img src="images/CoreOS.svg" alt="CoreOS" style="background:none; border:none; box-shadow:none; width:50%;" /></h2>
 					</section>
          </section>
        <!-- ########################################################################################## -->
          <section>
                                         <section id="Etcd">
-                                            <h2>Etcd2</h2>
+                                            <h2><img src="images/etcd-horizontal-color.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:25%;" /></h2>
 					    Solution Opensource de stockage de clef-valeur distribué.
                                                     <ul>
                                                         <li class="fragment">API Http en lecture/écriture via curl ou etcdctl.</li>
@@ -107,6 +107,10 @@
 							    <li class="fragment"><font color=blue>$ etcdctl get /foo</font><br> Hello world </li>
 							    <li class="fragment"><font color=blue>$ curl -L http://127.0.0.1:2379/v2/keys/bar</font><br>{"action":"get","node":{"key":"/bar","value":"Hello world","modifiedIndex":1943007,"createdIndex":1943007}} </li>
                 	                        </ul>
+                                        </section>
+                                        <section id="etcd-cluster">
+                                            <h3>Cluster Etcd</h3>
+					    <img src="images/Etcd-Cluster.png" alt="etcd" style="background:none; border:none; box-shadow:none; width:80%;" />
                                         </section>
          </section>
 
