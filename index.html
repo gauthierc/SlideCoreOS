@@ -28,7 +28,6 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-
 		<!--[if lt IE 9]>
 		<script src="reveal.js/lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -55,10 +54,10 @@
                                           <h2>En 40 minutes ou plus</h2>
 
                                           <ol>
-                                              <li>Petit rappel</li>
 					      <li>Présentation de <b>Core</b><font color="#f35b69">O</font><font color="#6d9eeb">S</font></li>
 					      <li>Etcd</li>
 					      <li>Fleet</li>
+					      <li>Cloud-init</li>
                                               <li>Architecture</li>
                                               <li>Mise en oeuvre</li>
                                               <li>Outils annexes</li>
@@ -77,8 +76,51 @@
  
          <section>
 					<section id="CoreOS">
-						<h1>Présentation de <img src="images/CoreOS.svg" style="background:none; border:none; box-shadow:none;" /></h1>
+						<h2>Présentation de <img src="images/CoreOS.svg" style="background:none; border:none; box-shadow:none; width:50%;" /></h2>
 					</section>
+         </section>
+       <!-- ########################################################################################## -->
+         <section>
+                                        <section id="Etcd">
+                                            <h2>Etcd2</h2>
+					    Solution Opensource de stockage de clef-valeur distribué.
+                                                    <ul>
+                                                        <li class="fragment">API Http en lecture/écriture via curl ou etcdctl.</li>
+                                                        <li class="fragment">Clefs et valeurs stockées dans une arboresence comme un système de fichier.</li>
+                                                        <li class="fragment">Superviser une clef ou un répertoire pour détecter un changement. </li>
+                                                        <li class="fragment">Possibilité de fixer un vérou ou une durée de vie (TTL).</li>
+                                                        <li class="fragment">Découverte des noeuds (static, etcd, dns).</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="etcdset">
+                                            <h3>Positionner une valeur</h3>
+                                                    <ul>
+							    <li><font color=blue>$ ssh 10.0.0.1</font><br>CoreOS beta (xxx.x.x) </li>
+							    <li class="fragment"><font color=blue>$ etcdctl set /foo "Hello world"</font><br> Hello world </li>
+							    <li class="fragment"><font color=blue>$ curl -L -X PUT http://127.0.0.1:2379/v2/keys/bar -d value="Hello world"</font><br>{"action":"set","node":{"key":"/bar","value":"Hello world","modifiedIndex":1943007,"createdIndex":1943007}} </li>
+                	                        </ul>
+                                        </section>
+                                        <section id="etcdget">
+                                            <h3>Récupérer une valeur</h3>
+                                                    <ul>
+							    <li><font color=blue>$ ssh 10.0.0.1</font><br>CoreOS beta (xxx.x.x) </li>
+							    <li class="fragment"><font color=blue>$ etcdctl get /foo</font><br> Hello world </li>
+							    <li class="fragment"><font color=blue>$ curl -L http://127.0.0.1:2379/v2/keys/bar</font><br>{"action":"get","node":{"key":"/bar","value":"Hello world","modifiedIndex":1943007,"createdIndex":1943007}} </li>
+                	                        </ul>
+                                        </section>
+         </section>
+
+
+       <!-- ########################################################################################## -->
+         <section>
+                                        <section id="Fleet">
+                                            <h2>Fleet</h2>
+                                                    <ul>
+                                                        <li class="fragment"> </li>
+                                                        <li class="fragment"> </li>
+                                                        <li class="fragment"> </li>
+                	                        </ul>
+                                        </section>
          </section>
        <!-- ########################################################################################## -->
          <section>
