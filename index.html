@@ -121,6 +121,57 @@
                                             <h3>Cluster Etcd</h3>
 					    <img src="images/Etcd-prod-Cluster.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:80%;" />
                                         </section>
+                                        <section id="etcd-cluster">
+                                            <h3>Cluster actif etcd et tolérance de panne</h3>
+					    <table><thead>
+							    <tr>
+								    <th>Active Peers</th>
+								    <th>Majority</th>
+								    <th>Failure Tolerance</th>
+							    </tr>
+						    </thead><tbody>
+						    <tr>
+							    <td>1 peers</td>
+							    <td>1 peers</td>
+							    <td>None</td>
+						    </tr>
+						    <tr>
+							    <td>3 peers</td>
+							    <td>2 peers</td>
+							    <td>1 peer</td>
+						    </tr>
+						    <tr>
+							    <td>4 peers</td>
+							    <td>3 peers</td>
+							    <td>1 peer</td>
+						    </tr>
+						    <tr>
+							    <td>5 peers</td>
+							    <td>3 peers</td>
+							    <td><strong>2 peers</strong></td>
+						    </tr>
+						    <tr>
+							    <td>6 peers</td>
+							    <td>4 peers</td>
+							    <td>2 peers</td>
+						    </tr>
+						    <tr>
+							    <td>7 peers</td>
+							    <td>4 peers</td>
+							    <td><strong>3 peers</strong></td>
+						    </tr>
+						    <tr>
+							    <td>8 peers</td>
+							    <td>5 peers</td>
+							    <td>3 peers</td>
+						    </tr>
+						    <tr>
+							    <td>9 peers</td>
+							    <td>5 peers</td>
+							    <td><strong>4 peers</strong></td>
+						    </tr>
+					    </tbody></table>
+				    </section>
          </section>
 
 
