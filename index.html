@@ -19,7 +19,16 @@
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
-
+		<style>
+			.reveal h3 {
+				text-transform: none;
+			}
+			#shell {
+				color: #255a7c;
+				font-family: Monospace;
+				font-size: 0.8em;
+			}
+		</style>
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -41,7 +50,7 @@
 			<div class="slides">
 				<section>
                                         <img src="images/CoreOS.svg" style="background:none; border:none; box-shadow:none;" />
-					<!--<h1>Core<font color="#f35b69">O</font><font color="#6d9eeb">S</font></h1>-->
+					<!--<h1>Core<span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h1>-->
 					<h3>Comprendre etcd, fleet & go</h3>
 					<p>
 						<small>Présentation de <a href="http://gauthierc.github.io/SlideCoreOS">Gauthier C.</a> / <a href="http://twitter.com/CattGr">@CattGr</a></small>
@@ -54,7 +63,7 @@
                                           <h2>En 40 minutes ou plus</h2>
 
                                           <ol>
-					      <li>Présentation de <b>Core</b><font color="#f35b69">O</font><font color="#6d9eeb">S</font></li>
+					      <li>Présentation de <b>Core</b><span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></li>
 					      <li>Etcd</li>
 					      <li>Fleet</li>
 					      <li>Cloud-init</li>
@@ -95,22 +104,22 @@
                                         <section id="etcdset">
                                             <h3>Positionner une valeur</h3>
                                                     <ul>
-							    <li><font color=blue>$ ssh 10.0.0.1</font><br>CoreOS beta (xxx.x.x) </li>
-							    <li class="fragment"><font color=blue>$ etcdctl set /foo "Hello world"</font><br> Hello world </li>
-							    <li class="fragment"><font color=blue>$ curl -L -X PUT http://127.0.0.1:2379/v2/keys/bar -d value="Hello world"</font><br>{"action":"set","node":{"key":"/bar","value":"Hello world","modifiedIndex":1943007,"createdIndex":1943007}} </li>
+							    <li><span id="shell">$ ssh 10.0.0.1</span><br>CoreOS beta (xxx.x.x) </li>
+							    <li class="fragment"><span id="shell">$ etcdctl set /foo "Hello world"</span><br> Hello world </li>
+							    <li class="fragment"><span id="shell">$ curl -L -X PUT http://127.0.0.1:2379/v2/keys/bar -d value="Hello world"</span><br>{"action":"set","node":{"key":"/bar","value":"Hello world","modifiedIndex":1943007,"createdIndex":1943007}} </li>
                 	                        </ul>
                                         </section>
                                         <section id="etcdget">
                                             <h3>Récupérer une valeur</h3>
                                                     <ul>
-							    <li><font color=blue>$ ssh 10.0.0.1</font><br>CoreOS beta (xxx.x.x) </li>
-							    <li class="fragment"><font color=blue>$ etcdctl get /foo</font><br> Hello world </li>
-							    <li class="fragment"><font color=blue>$ curl -L http://127.0.0.1:2379/v2/keys/bar</font><br>{"action":"get","node":{"key":"/bar","value":"Hello world","modifiedIndex":1943007,"createdIndex":1943007}} </li>
+							    <li><span id="shell">$ ssh 10.0.0.1</span><br>CoreOS beta (xxx.x.x) </li>
+							    <li class="fragment"><span id="shell">$ etcdctl get /foo</span><br> Hello world </li>
+							    <li class="fragment"><span id="shell">$ curl -L http://127.0.0.1:2379/v2/keys/bar</span><br>{"action":"get","node":{"key":"/bar","value":"Hello world","modifiedIndex":1943007,"createdIndex":1943007}} </li>
                 	                        </ul>
                                         </section>
                                         <section id="etcd-cluster">
                                             <h3>Cluster Etcd</h3>
-					    <img src="images/Etcd-Cluster.png" alt="etcd" style="background:none; border:none; box-shadow:none; width:80%;" />
+					    <img src="images/Etcd-prod-Cluster.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:80%;" />
                                         </section>
          </section>
 
