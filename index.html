@@ -51,9 +51,9 @@
 				<section>
                                         <img src="images/CoreOS.svg" style="background:none; border:none; box-shadow:none;" />
 					<!--<h1>Core<span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h1>-->
-					<h3>Comprendre etcd, fleet & go</h3>
+					<h3>Du concept à la mise en production</h3>
 					<p>
-						<small>Présentation de <a href="http://gauthierc.github.io/SlideCoreOS">Gauthier C.</a> / <a href="http://twitter.com/CattGr">@CattGr</a></small>
+					<small>Présenté par <a href="http://gauthierc.github.io/SlideCoreOS">Gauthier C.</a> / <a href="http://twitter.com/CattGr">@CattGr</a></small>
 					</p>
 				</section>
 
@@ -183,7 +183,7 @@
          <section>
                                         <section id="Fleet">
                                             <h2>Fleet</h2>
-                                                    <ul>
+                                                <ul>
                                                         <li class="fragment"> </li>
                                                         <li class="fragment"> </li>
                                                         <li class="fragment"> </li>
@@ -201,7 +201,133 @@
                                         <section id="utilisation">
                                             <h2>Mise en oeuvre</h2>
                                         </section>
-         </section>
+			          <section id="util-twelvefactor">
+			             <h3>The Twelve Factors</h3>
+			             <p>L'application des 12 facteurs permet de developper une application SaaS.</p>
+			             <center>
+			             <table>
+			                 <tr>
+			                    <td>
+			             <ol>
+			                 <li><h5>Codebase</h5></li>
+			                 <li><h5>Dependencies</h5></li>
+			                 <li><h5>Config</h5></li>
+			                 <li><h5>Backing Services</h5></li>
+			                 <li><h5>Build, release, run</h5></li>
+			                 <li><h5>Processes</h5></li>
+			             </ol>
+			                    </td>
+			                    <td>
+			             <ol start="7">
+			                 <li><h5>Port binding</h5></li>
+			                 <li><h5>Concurrency</h5></li>
+			                 <li><h5>Disposability</h5></li>
+			                 <li><h5>Dev/prod parity</h5></li>
+			                 <li><h5>Logs</h5></li>
+			                 <li><h5>Admin process</h5></li>
+			             </ol>
+			                    </td>
+			                 </tr>
+			            </table>
+			        </center>
+			        <p><href a="http://12factor.net">http://12factor.net</href> </p>
+			          </section>
+                                        <section id="util-12factor-codebase">
+                                            <h3>Codebase</h3>
+                                                <ul>
+                                                        <li >Tout code doit être géré par un logiciel de suivie de version (git, mercurial, ...) </li>
+                                                        <li >Une application = code source </li>
+                                                        <li > </li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-dep">
+			                    <h3>Dependencies</h3>
+                                                <ul>
+                                                        <li >Le système cible n'est pas sensé contenir de programme. </li>
+                                                        <li >Toutes les dépendances doivent être clairement précisées.</li>
+                                                        <li >Pas de dépendances implicite.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-config">
+                                            <h3>Config</h3>
+                                                <ul>
+                                                        <li >Est concidéré comme configuration, tous ce qui diffère d'un environnement à l'autre (dev, qualif, prod, autre site). </li>
+                                                        <li >Tout élement de configuration doit être passé par des variables d'environnement.</li>
+                                                        <li >Absolument aucune référence à la configuration dans le code.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-backing">
+						<h3>Backing Services</h3>
+                                                <ul>
+                                                        <li >Un <i>backing service </i> est une ressource accessible du réseau (base mysql, smtp, activemq, memcache...)</li>
+                                                        <li >L'accès à ces ressources doit être passé en paramètre.</li>
+							<li >Pas de distinction entre les services locaux et distant.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-build">
+                                            <h3>Build, release, run</h3>
+                                                <ul>
+                                                        <li >On recrée l'application et l'environnement avant chaque déployement d'une nouvelle version.</li>
+                                                        <li >Aucune modification n'est apporté sur l'application déployée. </li>
+                                                        <li >Chaque version déployée a un numéro de version unique (timestamp, numero de commit, ...) </li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-process">
+                                            <h3>Processes</h3>
+                                                <ul>
+                                                        <li >L'application est exécutée dans l'environnement d'exécution en tant que un ou plusieurs processus.</li>
+							<li >Toutes les données doivent être stockées dans une ressource externe (base de données).</li>
+                                                        <li >Les variables de sessions utilisateurs ne doivent jamais être stockées localement. </li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-port">
+                                            <h3>Port binding</h3>
+                                                <ul>
+                                                        <li >L'application fournit un service qui écoute sur un port.</li>
+                                                        <li > </li>
+                                                        <li > </li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-concurrency">
+                                            <h3>Concurrency</h3>
+                                                <ul>
+							<li >Chaque application peut être mise à l'echelle. Les conteneurs peuvent être lancés x fois pour répartir la charge</li>
+                                                        <li >Le programme dans le conteneur ne doit pas être lancé en tâche de fond.</li>
+                                                        <li >L'arrêt du programme entraine l'arrêt du conteneur.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-dispo">
+                                            <h3>Disposability</h3>
+                                                <ul>
+                                                        <li >Le conteneur doit être jetable.</li>
+                                                        <li >Il doit donc pouvoir être lancé très rapidement. </li>
+                                                        <li >Un arrêt intempestif ne doit pas compromètre les données.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-devprod">
+                                            <h3>Dev/prod parity</h3>
+                                                <ul>
+                                                        <li >Le développeur doit pouvoir déployer rapidement le code qu'il vient de finir d'écrire.</li>
+                                                        <li >Le développeur doit être plus proche du déploiement (DevOps).</li>
+                                                        <li >Maintenir le développement et la production aussi semblables que possible en utilisant les mêmes outils.</li>
+                                                        <li >Éviter de prendre des backends différents en prod et en dev (ex: base de données, ...) pour éviter les surprises en production.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-logs">
+                                            <h3>Logs</h3>
+                                                <ul>
+                                                        <li >Les applications doivent externaliser leurs journeaux pour la visualisation et l'archivage à long terme (ELK, Spunk, rsyslog ...).</li>
+                                                        <li >Les journeaux peuvent s'afficher dans la sortie standard de l'application, mais pas dans un fichier du conteneur.</li>
+                	                        </ul>
+                                        </section>
+                                        <section id="util-12factor-admin">
+                                            <h3>Admin process</h3>
+                                                <ul>
+                                                        <li >Les commandes d'administration doivent s'exécuter dans un environnement identique aux autres processus d'exploitation.</li>
+							<li >Même conteneur, même variables d'environnement, mais en mode interactif.</li>
+                	                        </ul>
+                                        </section>
+		  </section>
        <!-- ########################################################################################## -->
          <section>
                                         <section>
