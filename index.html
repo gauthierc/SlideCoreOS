@@ -199,11 +199,11 @@
        <!-- ########################################################################################## -->
          <section>
                                         <section id="utilisation">
-                                            <h2>Mise en oeuvre</h2>
+                                            <h2>CoreOS OK, mais pour quel type d'application</h2>
                                         </section>
 			          <section id="util-twelvefactor">
 			             <h3>The Twelve Factors</h3>
-			             <p>L'application des 12 facteurs permet de developper une application SaaS.</p>
+			             <p>12 recommandations pour un déploiement sans soucis.</p>
 			             <center>
 			             <table>
 			                 <tr>
@@ -237,7 +237,6 @@
                                                 <ul>
                                                         <li >Tout code doit être géré par un logiciel de suivie de version (git, mercurial, ...) </li>
                                                         <li >Une application = code source </li>
-                                                        <li > </li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-dep">
@@ -284,8 +283,6 @@
                                             <h3>Port binding</h3>
                                                 <ul>
                                                         <li >L'application fournit un service qui écoute sur un port.</li>
-                                                        <li > </li>
-                                                        <li > </li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-concurrency">
@@ -327,15 +324,37 @@
 							<li >Même conteneur, même variables d'environnement, mais en mode interactif.</li>
                 	                        </ul>
                                         </section>
+                                        <section id="mircoservice">
+                                            <h2>12-factors c'est bien mais...</h2>
+                                            <h3>... cela répond juste à la question «Comment?», mais pas «Pourquoi?» ni «Quoi?»</h3>
+                                        </section>
+                                        <section id="mircoservice-why">
+                                            <h3>«Pourquoi?»</h3>
+					    <p>Votre système doit être réactif aux:</p>
+					    <ul>
+						    <li>Évenements</li>
+						    <li>Charges</li>
+						    <li>Pannes</li>
+						    <li>Utilisateurs</li>
+					    </ul>
+                                        </section>
+                                        <section id="mircoservice-what">
+                                            <h3>«Quoi?»</h3>
+					    <p>Un système distribué basé sur des micro-services qui communiquent via les files de messages.</p>
+					    <ul>
+						    <li>Plein de Micro-services plutôt qu'un programme monolithique</li>
+						    <li>Chaque Micro-service fait une seule chose mais le fait bien</li>
+						    <li>Les Micro-services sont deployés indépendamments</li>
+						    <li>Ils communique en utilisant les files de messages (ex AMQP)</li>
+					    </ul>
+                                        </section>
 		  </section>
        <!-- ########################################################################################## -->
          <section>
                                         <section>
                                             <h2>Outils annexes</h2>
-                                                    <ul>
+                                                <ul>
                                                         <li class="fragment"><b>A</b>: </li>
-                                                        <li class="fragment"><b>B</b>: </li>
-                                                        <li class="fragment"><b>C</b>: </li>
                 	                        </ul>
                                         </section>
          </section>
