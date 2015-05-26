@@ -64,9 +64,9 @@
 
                                           <ol>
 					      <li>Présentation de <b>Core</b><span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></li>
+					      <li>Cloud Config</li>
 					      <li>Etcd</li>
 					      <li>Fleet</li>
-					      <li>Cloud-init</li>
                                               <li>Architecture</li>
                                               <li>Mise en oeuvre</li>
                                               <li>Outils annexes</li>
@@ -88,8 +88,47 @@
 						<h2>Présentation de <img src="images/CoreOS.svg" alt="CoreOS" style="background:none; border:none; box-shadow:none; width:50%;" /></h2>
 					</section>
                                         <section id="CoreOS-system">
+                                            <h3>Comparaison entre un Hyperviseur et CoreOS </h3>
+					    <img src="images/CoreOS-vs-Hypervisor.png" alt="etcd" style="background:none; border:none; box-shadow:none; width:120%;" />
+                                        </section>
+                                        <section id="CoreOS-system">
                                             <h3>Briques CoreOS</h3>
 					    <img src="images/CoreOS-system.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:80%;" />
+                                        </section>
+         </section>
+       <!-- ########################################################################################## -->
+         <section>
+                                        <section id="CloudInit">
+                                            <h2>CoreOS Cloud-init</h2>
+					    <h4>Ou comment installer vos serveurs CoreOS sans les installer.</h4>
+                                        </section>
+                                        <section id="CloudInit-config">
+                                            <h3>Cloud Config</h3>
+					    <p>CoreOS-cloudinit permet à un administrateur de personnaliser ses machines CoreOS en fournissant un document Cloud Config au format YAML.</p>
+					    <pre>
+#cloud-config
+
+coreos:
+    units:
+      - name: etcd2.service
+        command: start
+
+users:
+  - name: core
+    passwd: $1$allJZawX$00S5T756I5PGdQga5qhqv1
+
+write_files:
+  - path: /etc/resolv.conf
+    content: |
+        nameserver 192.0.2.2
+        nameserver 192.0.2.3
+</pre>
+
+                                        </section>
+                                        <section id="CloudInit-ipxe">
+                                            <h3>dhcp pxe/ipxe</h3>
+					    <p>Nous avons mis en place un serveur ipxe qui fournit à chaque serveur CoreOS son image de boot et son fichier cloud-init.</p>
+					    <p>Le serveur obtient ces informations via le serveur dhcp.</p>
                                         </section>
          </section>
        <!-- ########################################################################################## -->
@@ -101,8 +140,8 @@
                                                         <li class="fragment">API Http en lecture/écriture via curl ou etcdctl.</li>
                                                         <li class="fragment">Clefs et valeurs stockées dans une arboresence comme un système de fichier.</li>
                                                         <li class="fragment">Superviser une clef ou un répertoire pour détecter un changement. </li>
-                                                        <li class="fragment">Possibilité de fixer un vérou ou une durée de vie (TTL).</li>
-                                                        <li class="fragment">Découverte des noeuds (static, etcd, dns).</li>
+                                                        <li class="fragment">Possibilité de fixer un verrou ou une durée de vie (TTL).</li>
+                                                        <li class="fragment">Découverte des nœuds (static, etcd, dns).</li>
                 	                        </ul>
                                         </section>
                                         <section id="etcdset">
@@ -182,11 +221,31 @@
        <!-- ########################################################################################## -->
          <section>
                                         <section id="Fleet">
-                                            <h2>Fleet</h2>
+                                             <h2>Fleet</h2>
+					     <p> Fleet permet de gérer sur l'ensemble d'un cluster CoreOS, les fichiers systemd. 
+					     </p>
+					    <img src="images/Fleet-Overview.png" alt="etcd" style="background:none; border:none; box-shadow:none; " />
+                                        </section>
+                                        <section id="Fleet-scheduling">
+                                             <h3>Ordonnancement avec Fleet</h3>
+					     <p> La directive systemd <b>[X-Fleet]</b> permet d'étendre le fonctionnement des scripts systemd. 
+					     </p>
                                                 <ul>
-                                                        <li class="fragment"> </li>
-                                                        <li class="fragment"> </li>
-                                                        <li class="fragment"> </li>
+                                                        <li class="fragment">Global: lance un <i>unit</i> systemd sur l'ensemble des nœuds.</li>
+                                                        <li class="fragment">MachineMetadata: lance un  <i>unit</i> que sur certains membres du cluster (en fonction du Metadata) </li>
+							<li class="fragment">Conflits: permet d'exclure 2 <i>units</i> incompatibles tournent sur le même serveur. </li>
+                                                        <li class="fragment">MachineOf: inversement, permet de lier 2 <i>units</i> ensemble sur un même serveur. </li>
+                	                        </ul>
+                                        </section>
+                                        <section id="Fleet-etcd">
+                                             <h3>Fleet + etcd</h3>
+                                                <ul>
+							<li>Fleet a besoin d'une vue complète du cluster afin de répartir ces units sur l'ensemble des nœuds actif. </li>
+							<ul>
+								<li> Quels units tournent sur le serveur?</li>
+								<li> Quelles machines fonctionnent dans le cluster?</li>
+							</ul>
+							<li>Chaque fichier <i>unit</i>, chaque état des process, état des machines sont stockés dans etdc. </li>
                 	                        </ul>
                                         </section>
          </section>
@@ -250,8 +309,8 @@
                                         <section id="util-12factor-config">
                                             <h3>Config</h3>
                                                 <ul>
-                                                        <li >Est concidéré comme configuration, tous ce qui diffère d'un environnement à l'autre (dev, qualif, prod, autre site). </li>
-                                                        <li >Tout élement de configuration doit être passé par des variables d'environnement.</li>
+                                                        <li >Est considéré comme configuration, tous ce qui diffère d'un environnement à l'autre (dev, qualif, prod, autre site). </li>
+                                                        <li >Tout élément de configuration doit être passé par des variables d'environnement.</li>
                                                         <li >Absolument aucune référence à la configuration dans le code.</li>
                 	                        </ul>
                                         </section>
@@ -266,7 +325,7 @@
                                         <section id="util-12factor-build">
                                             <h3>Build, release, run</h3>
                                                 <ul>
-                                                        <li >On recrée l'application et l'environnement avant chaque déployement d'une nouvelle version.</li>
+                                                        <li >On recrée l'application et l'environnement avant chaque déploiement d'une nouvelle version.</li>
                                                         <li >Aucune modification n'est apporté sur l'application déployée. </li>
                                                         <li >Chaque version déployée a un numéro de version unique (timestamp, numero de commit, ...) </li>
                 	                        </ul>
@@ -290,7 +349,7 @@
                                                 <ul>
 							<li >Chaque application peut être mise à l'echelle. Les conteneurs peuvent être lancés x fois pour répartir la charge</li>
                                                         <li >Le programme dans le conteneur ne doit pas être lancé en tâche de fond.</li>
-                                                        <li >L'arrêt du programme entraine l'arrêt du conteneur.</li>
+                                                        <li >L'arrêt du programme entraîne l'arrêt du conteneur.</li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-dispo">
@@ -298,7 +357,7 @@
                                                 <ul>
                                                         <li >Le conteneur doit être jetable.</li>
                                                         <li >Il doit donc pouvoir être lancé très rapidement. </li>
-                                                        <li >Un arrêt intempestif ne doit pas compromètre les données.</li>
+                                                        <li >Un arrêt intempestif ne doit pas compromettre les données.</li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-devprod">
@@ -313,8 +372,8 @@
                                         <section id="util-12factor-logs">
                                             <h3>Logs</h3>
                                                 <ul>
-                                                        <li >Les applications doivent externaliser leurs journeaux pour la visualisation et l'archivage à long terme (ELK, Spunk, rsyslog ...).</li>
-                                                        <li >Les journeaux peuvent s'afficher dans la sortie standard de l'application, mais pas dans un fichier du conteneur.</li>
+                                                        <li >Les applications doivent externaliser leurs journaux pour la visualisation et l'archivage à long terme (ELK, Spunk, rsyslog ...).</li>
+                                                        <li >Les journaux peuvent s'afficher dans la sortie standard de l'application, mais pas dans un fichier du conteneur.</li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-admin">
@@ -326,26 +385,16 @@
                                         </section>
                                         <section id="mircoservice">
                                             <h2>12-factors c'est bien mais...</h2>
-                                            <h3>... cela répond juste à la question «Comment?», mais pas «Pourquoi?» ni «Quoi?»</h3>
+                                            <h3>... Comment le mettre en oeuvre de façon efficace.</h3>
                                         </section>
-                                        <section id="mircoservice-why">
-                                            <h3>«Pourquoi?»</h3>
-					    <p>Votre système doit être réactif aux:</p>
+                                        <section id="mircoservice-solution">
+                                            <h3>Les Micro-services</h3>
+					    <p>Un système distribué basé sur des micro-services qui communiquent via des files de messages.</p>
 					    <ul>
-						    <li>Évenements</li>
-						    <li>Charges</li>
-						    <li>Pannes</li>
-						    <li>Utilisateurs</li>
-					    </ul>
-                                        </section>
-                                        <section id="mircoservice-what">
-                                            <h3>«Quoi?»</h3>
-					    <p>Un système distribué basé sur des micro-services qui communiquent via les files de messages.</p>
-					    <ul>
-						    <li>Plein de Micro-services plutôt qu'un programme monolithique</li>
-						    <li>Chaque Micro-service fait une seule chose mais le fait bien</li>
-						    <li>Les Micro-services sont deployés indépendamments</li>
-						    <li>Ils communique en utilisant les files de messages (ex AMQP)</li>
+						    <li>Plein de Micro-services plutôt qu'un programme monolithique.</li>
+						    <li>Chaque Micro-service fait une seule chose mais le fait bien (Philosophie Unix).</li>
+						    <li>Les Micro-services sont déployés indépendamment.</li>
+						    <li>Ils communiquent en utilisant des files de messages (ex AMQP).</li>
 					    </ul>
                                         </section>
 		  </section>
