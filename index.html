@@ -64,11 +64,10 @@
 
                                           <ol>
 					      <li>Présentation de <b>Core</b><span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></li>
-					      <li>Cloud Config</li>
+					      <li>Installation avec Cloud Config</li>
 					      <li>Etcd</li>
 					      <li>Fleet</li>
-                                              <li>Architecture</li>
-                                              <li>Mise en oeuvre</li>
+                                              <li>Quel type d'application?</li>
                                               <li>Outils annexes</li>
                                           </ol>
                                 </section>
@@ -81,11 +80,15 @@
 					</section>
                                         <section id="CoreOS-system">
                                             <h3>Comparaison entre un Hyperviseur et CoreOS </h3>
-					    <img src="images/CoreOS-vs-Hypervisor.png" alt="etcd" style="background:none; border:none; box-shadow:none; width:120%;" />
+					    <img src="images/CoreOS-vs-Hypervisor.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:150%;" />
                                         </section>
                                         <section id="CoreOS-system">
                                             <h3>Briques CoreOS</h3>
 					    <img src="images/CoreOS-system.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:80%;" />
+                                        </section>
+                                        <section id="CoreOS-archi">
+                                            <h3>Architecture CoreOS</h3>
+					    <img src="images/Three-Tier-Webapp.png" alt="etcd" style="background:none; border:none; box-shadow:none; " />
                                         </section>
 					<section id="CoreOS-Docker">
                                                 <h3>Docker c'est quoi déjà ?</h3>
@@ -125,6 +128,20 @@ write_files:
                                             <h3>dhcp pxe/ipxe</h3>
 					    <p>Nous avons mis en place un serveur ipxe qui fournit à chaque serveur CoreOS son image de boot et son fichier cloud-init.</p>
 					    <p>Le serveur obtient ces informations via le serveur dhcp.</p>
+					    <pre>
+host coreos1 {
+  hardware ethernet 1e:3f:4e:53:1f:52;
+  next-server 10.0.0.11;
+  fixed-address 10.0.0.21;
+  server-name "coreos1.mondomaine";
+  if exists user-class and option user-class = "iPXE" {
+  	filename "http://10.0.0.11:4777/?profile=production";
+  } else {
+        filename "undionly.kpxe";
+  }
+
+}
+					    </pre>
                                         </section>
          </section>
        <!-- ########################################################################################## -->
@@ -245,13 +262,13 @@ write_files:
                 	                        </ul>
                                         </section>
          </section>
-       <!-- ########################################################################################## -->
+       <!-- ########################################################################################## 
          <section>
                                         <section id="Architecture">
                                             <h2>Architecture</h2>
                                         </section>
          </section>
-       <!-- ########################################################################################## -->
+        ########################################################################################## -->
          <section>
                                         <section id="utilisation">
                                             <h2>CoreOS OK, mais pour quel type d'application</h2>
