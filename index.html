@@ -16,7 +16,7 @@
 
 		<link rel="stylesheet" href="reveal.js/css/reveal.css">
 		<link rel="stylesheet" href="reveal.js/css/theme/sky.css" id="theme">
-
+		<link rel="shortcut icon" href="./images/favicon.png">
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
 		<style>
@@ -150,8 +150,8 @@ host coreos1 {
                                             <h2><img src="images/etcd-horizontal-color.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:25%;" /></h2>
 					    Solution Opensource de stockage de clef-valeur distribué.
                                                     <ul>
-                                                        <li class="fragment">API Http en lecture/écriture via curl ou etcdctl.</li>
-                                                        <li class="fragment">Clefs et valeurs stockées dans une arboresence comme un système de fichier.</li>
+							    <li class="fragment">API Http en lecture/écriture via <i>curl</i> ou <i>etcdctl</i>.</li>
+                                                        <li class="fragment">Clefs et valeurs stockées dans une arboresence comme dans un système de fichier.</li>
                                                         <li class="fragment">Superviser une clef ou un répertoire pour détecter un changement. </li>
                                                         <li class="fragment">Possibilité de fixer un verrou ou une durée de vie (TTL).</li>
                                                         <li class="fragment">Découverte des nœuds (static, etcd, dns).</li>
@@ -314,8 +314,8 @@ host coreos1 {
                                         <section id="util-12factor-dep">
 			                    <h3>Dependencies</h3>
                                                 <ul>
-                                                        <li >Le système cible n'est pas sensé contenir de programme. </li>
                                                         <li >Toutes les dépendances doivent être clairement précisées.</li>
+                                                        <li >Le système cible n'est pas sensé contenir de programme pré-installé. </li>
                                                         <li >Pas de dépendances implicite.</li>
                 	                        </ul>
                                         </section>
@@ -324,7 +324,7 @@ host coreos1 {
                                                 <ul>
                                                         <li >Est considéré comme configuration, tous ce qui diffère d'un environnement à l'autre (dev, qualif, prod, autre site). </li>
                                                         <li >Tout élément de configuration doit être passé par des variables d'environnement.</li>
-                                                        <li >Absolument aucune référence à la configuration dans le code.</li>
+                                                        <li >Il ne doit y avoir absolument aucune référence à la configuration dans le code.</li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-backing">
@@ -360,7 +360,7 @@ host coreos1 {
                                         <section id="util-12factor-concurrency">
                                             <h3>Concurrency</h3>
                                                 <ul>
-							<li >Chaque application peut être mise à l'echelle. Les conteneurs peuvent être lancés x fois pour répartir la charge</li>
+							<li >Chaque application peut être mise à l'echelle. Les conteneurs peuvent être lancés x fois pour répartir la charge.</li>
                                                         <li >Le programme dans le conteneur ne doit pas être lancé en tâche de fond.</li>
                                                         <li >L'arrêt du programme entraîne l'arrêt du conteneur.</li>
                 	                        </ul>
