@@ -161,20 +161,21 @@ host coreos1 {
                                             <h3>Positionner une valeur</h3>
                                                     <ul>
 							    <li><span id="shell">$ ssh 10.0.0.1</span><br>CoreOS beta (xxx.x.x) </li>
-							    <li class="fragment"><span id="shell">$ etcdctl set /foo "Hello world"</span><br> Hello world </li>
-							    <li class="fragment"><span id="shell">$ curl -L -X PUT http://127.0.0.1:2379/v2/keys/bar -d value="Hello world"</span><br>{"action":"set","node":{"key":"/bar","value":"Hello world","modifiedIndex":1943007,"createdIndex":1943007}} </li>
+							    <li ><span id="shell">$ etcdctl set /foo "Hello world"</span><br> Hello world </li>
+							    <li class="fragment"><span id="shell">$ curl -L -X <b>PUT</b> http://127.0.0.1:2379/v2/keys<b>/bar</b> -d value="<b>Hello world</b>"</span><br>{"action":"<b>set</b>","node":{"key":"<b>/bar</b>","value":"<b>Hello world</b>","modifiedIndex":1943007,"createdIndex":1943007}} </li>
                 	                        </ul>
                                         </section>
                                         <section id="etcdget">
                                             <h3>Récupérer une valeur</h3>
                                                     <ul>
 							    <li><span id="shell">$ ssh 10.0.0.1</span><br>CoreOS beta (xxx.x.x) </li>
-							    <li class="fragment"><span id="shell">$ etcdctl get /foo</span><br> Hello world </li>
-							    <li class="fragment"><span id="shell">$ curl -L http://127.0.0.1:2379/v2/keys/bar</span><br>{"action":"get","node":{"key":"/bar","value":"Hello world","modifiedIndex":1943007,"createdIndex":1943007}} </li>
+							    <li ><span id="shell">$ etcdctl get /foo</span><br> Hello world </li>
+							    <li class="fragment"><span id="shell">$ curl -L http://127.0.0.1:2379/v2/keys<b>/bar</b></span><br>{"action":"<b>get</b>","node":{"key":"<b>/bar</b>","value":"<b>Hello world</b>","modifiedIndex":1943007,"createdIndex":1943007}} </li>
                 	                        </ul>
                                         </section>
                                         <section id="etcd-cluster">
                                             <h3>Cluster Etcd</h3>
+					    <p>Pour un déploiement large (supérieur à 10 noeuds) il est conseillé d'avoir un nombre de bases etcd limité, afin de ne pas passer trop de temps à obtenir le corum.</p>
 					    <img src="images/Etcd-prod-Cluster.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:80%;" />
                                         </section>
                                         <section id="etcd-cluster">
@@ -244,10 +245,10 @@ host coreos1 {
 					     <p> La directive systemd <b>[X-Fleet]</b> permet d'étendre le fonctionnement des scripts systemd. 
 					     </p>
                                                 <ul>
-                                                        <li class="fragment">Global: lance un <i>unit</i> systemd sur l'ensemble des nœuds.</li>
-                                                        <li class="fragment">MachineMetadata: lance un  <i>unit</i> que sur certains membres du cluster (en fonction du Metadata) </li>
-							<li class="fragment">Conflits: permet d'exclure 2 <i>units</i> incompatibles tournent sur le même serveur. </li>
-                                                        <li class="fragment">MachineOf: inversement, permet de lier 2 <i>units</i> ensemble sur un même serveur. </li>
+							<li class="fragment"><b>Global</b>: lance un <i>unit</i> systemd sur l'ensemble des nœuds.</li>
+							<li class="fragment"><b>MachineMetadata</b>: lance un  <i>unit</i> que sur certains membres du cluster (en fonction du Metadata) </li>
+							<li class="fragment"><b>Conflits</b>: permet d'exclure 2 <i>units</i> incompatibles tournent sur le même serveur. </li>
+							<li class="fragment"><b>MachineOf</b>: inversement, permet de lier 2 <i>units</i> ensemble sur un même serveur. </li>
                 	                        </ul>
                                         </section>
                                         <section id="Fleet-etcd">
@@ -263,6 +264,7 @@ host coreos1 {
                                         </section>
                                         <section id="Fleetctl-list-machines">
                                              <h3>Fleetctl list-machines</h3>
+					     <p>Pour que fleet fonctionne, la base etcd doit être accessible en lecture/écriture.</p>
 					     <pre>
 core@coreos1 ~ $ fleetctl list-machines
 MACHINE         IP              METADATA
@@ -273,7 +275,7 @@ c93c01c0...     10.0.0.24    location=dsi,plateform=kvm,version=681.0.0
 					     </pre>
                                         </section>
                                         <section id="Fleet-unit">
-                                             <h3>cadvisor.service</h3>
+                                             <h3>Exemple service Global: cadvisor.service</h3>
 					     <pre>
 [Unit]
 Description=Google Container Advisor
@@ -312,6 +314,9 @@ cadvisor.service        32a89c4b.../10.0.0.21           active  running
 cadvisor.service        9b2fc7d5.../10.0.0.22           active  running
 cadvisor.service        c93c01c0.../10.0.0.24           active  running
 cadvisor.service        ff9f347b.../10.0.0.23           active  running
+
+core@coreos1 ~ $ fleetctl stop cadvisor.service
+Triggered global unit cadvisor.service stop
 					     </pre>
                                         </section>
          </section>
