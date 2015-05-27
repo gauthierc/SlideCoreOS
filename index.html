@@ -99,7 +99,7 @@
          <section>
                                         <section id="CloudInit">
                                             <h2>CoreOS Cloud-init</h2>
-					    <h4>Ou comment installer vos serveurs CoreOS sans les installer.</h4>
+					    <h3>Ou comment installer vos serveurs CoreOS sans rien installer.</h3>
                                         </section>
                                         <section id="CloudInit-config">
                                             <h3>Cloud Config</h3>
@@ -152,7 +152,7 @@ host coreos1 {
                                                     <ul>
 							    <li class="fragment">API Http en lecture/écriture via <i>curl</i> ou <i>etcdctl</i>.</li>
                                                         <li class="fragment">Clefs et valeurs stockées dans une arboresence comme dans un système de fichier.</li>
-                                                        <li class="fragment">Superviser une clef ou un répertoire pour détecter un changement. </li>
+                                                        <li class="fragment">Supervision d'une clef ou d'un répertoire pour détecter un changement.</li>
                                                         <li class="fragment">Possibilité de fixer un verrou ou une durée de vie (TTL).</li>
                                                         <li class="fragment">Découverte des nœuds (static, etcd, dns).</li>
                 	                        </ul>
@@ -175,57 +175,57 @@ host coreos1 {
                                         </section>
                                         <section id="etcd-cluster">
                                             <h3>Cluster Etcd</h3>
-					    <p>Pour un déploiement large (supérieur à 10 noeuds) il est conseillé d'avoir un nombre de bases etcd limité, afin de ne pas passer trop de temps à obtenir le corum.</p>
+					    <p>Pour un déploiement large (supérieur à 10 nœuds) il est conseillé d'avoir un nombre de bases etcd limité, afin de ne pas passer trop de temps à obtenir le corum.</p>
 					    <img src="images/Etcd-prod-Cluster.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:80%;" />
                                         </section>
                                         <section id="etcd-cluster">
                                             <h3>Cluster actif etcd et tolérance de panne</h3>
 					    <table><thead>
 							    <tr>
-								    <th>Active Peers</th>
-								    <th>Majority</th>
-								    <th>Failure Tolerance</th>
+								    <th>Membre(s) Actif(s)</th>
+								    <th>Majorité</th>
+								    <th>Tolérance de panne</th>
 							    </tr>
 						    </thead><tbody>
 						    <tr>
-							    <td>1 peers</td>
-							    <td>1 peers</td>
+							    <td>1 membre</td>
+							    <td>1 membre</td>
 							    <td>None</td>
 						    </tr>
 						    <tr>
-							    <td>3 peers</td>
-							    <td>2 peers</td>
-							    <td>1 peer</td>
+							    <td>3 membres</td>
+							    <td>2 membres</td>
+							    <td>1 membre</td>
 						    </tr>
 						    <tr>
-							    <td>4 peers</td>
-							    <td>3 peers</td>
-							    <td>1 peer</td>
+							    <td>4 membres</td>
+							    <td>3 membres</td>
+							    <td>1 membre</td>
 						    </tr>
 						    <tr>
-							    <td>5 peers</td>
-							    <td>3 peers</td>
-							    <td><strong>2 peers</strong></td>
+							    <td>5 membres</td>
+							    <td>3 membres</td>
+							    <td><strong>2 membres</strong></td>
 						    </tr>
 						    <tr>
-							    <td>6 peers</td>
-							    <td>4 peers</td>
-							    <td>2 peers</td>
+							    <td>6 membres</td>
+							    <td>4 membres</td>
+							    <td>2 membres</td>
 						    </tr>
 						    <tr>
-							    <td>7 peers</td>
-							    <td>4 peers</td>
-							    <td><strong>3 peers</strong></td>
+							    <td>7 membres</td>
+							    <td>4 membres</td>
+							    <td><strong>3 membres</strong></td>
 						    </tr>
 						    <tr>
-							    <td>8 peers</td>
-							    <td>5 peers</td>
-							    <td>3 peers</td>
+							    <td>8 membres</td>
+							    <td>5 membres</td>
+							    <td>3 membres</td>
 						    </tr>
 						    <tr>
-							    <td>9 peers</td>
-							    <td>5 peers</td>
-							    <td><strong>4 peers</strong></td>
+							    <td>9 membres</td>
+							    <td>5 membres</td>
+							    <td><strong>4 membres</strong></td>
 						    </tr>
 					    </tbody></table>
 				    </section>
@@ -245,7 +245,7 @@ host coreos1 {
 					     <p> La directive systemd <b>[X-Fleet]</b> permet d'étendre le fonctionnement des scripts systemd. 
 					     </p>
                                                 <ul>
-							<li class="fragment"><b>Global</b>: lance un <i>unit</i> systemd sur l'ensemble des nœuds.</li>
+							<li><b>Global</b>: lance un <i>unit</i> systemd sur l'ensemble des nœuds.</li>
 							<li class="fragment"><b>MachineMetadata</b>: lance un  <i>unit</i> que sur certains membres du cluster (en fonction du Metadata) </li>
 							<li class="fragment"><b>Conflits</b>: permet d'exclure 2 <i>units</i> incompatibles tournent sur le même serveur. </li>
 							<li class="fragment"><b>MachineOf</b>: inversement, permet de lier 2 <i>units</i> ensemble sur un même serveur. </li>
