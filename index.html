@@ -261,6 +261,59 @@ host coreos1 {
 							<li>Chaque fichier <i>unit</i>, chaque état des process, état des machines sont stockés dans etdc. </li>
                 	                        </ul>
                                         </section>
+                                        <section id="Fleetctl-list-machines">
+                                             <h3>Fleetctl list-machines</h3>
+					     <pre>
+core@coreos1 ~ $ fleetctl list-machines
+MACHINE         IP              METADATA
+32a89c4b...     10.0.0.21    location=dsi,plateform=kvm,version=681.0.0
+9b2fc7d5...     10.0.0.22    location=dsi,plateform=kvm,version=681.0.0
+ff9f347b...     10.0.0.23    location=dsi,plateform=kvm,version=681.0.0
+c93c01c0...     10.0.0.24    location=dsi,plateform=kvm,version=681.0.0
+					     </pre>
+                                        </section>
+                                        <section id="Fleet-unit">
+                                             <h3>cadvisor.service</h3>
+					     <pre>
+[Unit]
+Description=Google Container Advisor
+Requires=docker.socket
+After=docker.socket
+
+[Service]
+ExecStartPre=/bin/sh -c "docker history google/cadvisor:latest >/dev/null || docker pull google/cadvisor:latest"
+ExecStart=/usr/bin/docker run --rm --volume=/:/rootfs:ro --volume=/var/run:/var/run:rw --volume=/sys:/sys:ro --volume=/var/lib/docker/:/var/lib/docker:ro --publish=8080:8080 --name=cadvisor google/cadvisor:latest
+Restart=always
+RestartSec=20s
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+Global=true
+					     </pre>
+                                        </section>
+                                        <section id="Fleetctl-gestion-units">
+                                             <h3>Gestion des units avec fleetctl</h3>
+					     <pre>
+core@coreos1 ~ $ fleetctl load cadvisor.service
+Triggered global unit cadvisor.service load
+
+core@coreos1 ~ $ fleetctl list-unit-files
+UNIT                    HASH    DSTATE  STATE   TARGET
+cadvisor.service        85f57eb loaded  -       global
+
+core@coreos1 ~ $ fleetctl start cadvisor.service
+Triggered global unit cadvisor.service start
+
+core@coreos1 ~ $ fleetctl list-units
+UNIT                    MACHINE                         ACTIVE  SUB
+cadvisor.service        32a89c4b.../10.0.0.21           active  running
+cadvisor.service        9b2fc7d5.../10.0.0.22           active  running
+cadvisor.service        c93c01c0.../10.0.0.24           active  running
+cadvisor.service        ff9f347b.../10.0.0.23           active  running
+					     </pre>
+                                        </section>
          </section>
        <!-- ########################################################################################## 
          <section>
