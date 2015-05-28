@@ -52,8 +52,8 @@
                                         <img src="images/CoreOS.svg" style="background:none; border:none; box-shadow:none;" />
 					<!--<h1>Core<span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h1>-->
 					<h3>Du concept à la mise en production</h3>
-					<p>
-					<small>Présenté par <a href="http://gauthierc.github.io/SlideCoreOS">Gauthier C.</a> / <a href="http://twitter.com/CattGr">@CattGr</a></small>
+					<p><small><small>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Présentation CoreOS</span> de <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName"><a href="http://twitter.com/CattGr">@CattGr</a></span> est mis à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">licence Creative Commons Attribution 4.0 International</a></small></small>
 					</p>
 				</section>
 
@@ -146,7 +146,18 @@ host coreos1 {
                                         <section id="CloudInit-images">
                                             <h3>Images ipxe</h3>
 					    <p>Les images sont téléchargés sur le site de CoreOS. Une version de CoreOS est spécifié pour chaque profile.</p>
+					    <h5>Exemple de fichier config: production.json</h5>
 					    <pre>
+# cat production.json 
+{
+    "cloud_config": "production",
+    "console": ["tty0", "tty1"],
+    "coreos_autologin": "tty1",
+    "rootfstype": "btrfs",
+    "root": "LABEL=ROOT",
+    "sshkey": "coreos",
+    "version": "681.0.0"
+}
 					    </pre>
                                         </section>
                                         <section id="CloudInit-channel">
@@ -208,7 +219,7 @@ host coreos1 {
 								    <th>Majorité</th>
 								    <th>Tolérance de panne</th>
 							    </tr>
-						    </thead><tbody>
+						    </thead><tbody><small>
 						    <tr>
 							    <td>1 membre</td>
 							    <td>1 membre</td>
@@ -248,7 +259,7 @@ host coreos1 {
 							    <td>9 membres</td>
 							    <td>5 membres</td>
 							    <td><strong>4 membres</strong></td>
-						    </tr>
+						    </tr></small>
 					    </tbody></table>
 				    </section>
          </section>
