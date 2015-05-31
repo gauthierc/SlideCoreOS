@@ -59,7 +59,7 @@
 					<!--<h1>Core<span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h1>-->
 					<h3>Du concept à la mise en production</h3>
 					<p><small><small>
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Présentation CoreOS</span> de <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName"><a href="http://twitter.com/CattGr">@CattGr</a></span> est mis à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">licence Creative Commons Attribution 4.0 International</a></small></small>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Présentation CoreOS</span> de <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName"><a href="http://twitter.com/CattGr">@CattGr</a></span> est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">licence Creative Commons Attribution 4.0 International</a></small></small>
 					</p>
 				</section>
 
@@ -73,7 +73,7 @@
 					      <li>Installation avec Cloud Config</li>
 					      <li>Etcd</li>
 					      <li>Fleet</li>
-                                              <li>Quel type d'application?</li>
+                                              <li>Quel type d'application&nbsp;?</li>
                                               <li>Mise en production</li>
                                           </ol>
                                 </section>
@@ -151,7 +151,7 @@ host coreos1 {
                                         </section>
                                         <section id="CloudInit-images">
                                             <h3>Images ipxe</h3>
-					    <p>Les images sont téléchargés sur le site de CoreOS. Une version de CoreOS est spécifié pour chaque profile.</p>
+					    <p>Les images sont téléchargées sur le site de CoreOS. Une version de CoreOS est spécifiée pour chaque profil.</p>
 					    <h5>Exemple de fichier config: production.json</h5>
 					    <pre>
 # cat production.json 
@@ -177,7 +177,7 @@ host coreos1 {
 						    <tr>
 							    <td>Le canal Stable est utilisable en production. Chaque nouvelle version livrée a été longuement testée.</td>
 							    <td>Dans le canal Beta, on retrouve les versions Alpha ayant une certaine stablilité.</td>
-							    <td>Le canal Alpha suit de près le travail de développement en cours et est mise à jour fréquemment. Les dernières versions de docker , ETCD et fleet seront disponibles pour les tests.</td>
+							    <td>Le canal Alpha suit de près le travail de développement en cours et est mis à jour fréquemment. Les dernières versions de <b>docker</b>, <b>etcd</b> et <b>fleet</b> seront disponibles pour les tests.</td>
 						    </tr>
 					    </tbody></table>
 	</section>
@@ -186,10 +186,10 @@ host coreos1 {
          <section>
                                         <section id="Etcd">
                                             <h2><img src="images/etcd-horizontal-color.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:25%;" /></h2>
-					    Solution Opensource de stockage de clef-valeur distribué.
+					    Solution Opensource de stockage de clef-valeur distribuée.
                                                     <ul>
-							    <li class="fragment">API Http en lecture/écriture via <i>curl</i> ou <i>etcdctl</i>.</li>
-                                                        <li class="fragment">Clefs et valeurs stockées dans une arboresence comme dans un système de fichier.</li>
+							<li class="fragment">API Http en lecture/écriture via <i>curl</i> ou <i>etcdctl</i>.</li>
+                                                        <li class="fragment">Clefs et valeurs stockées dans une arborescence comme dans un système de fichiers.</li>
                                                         <li class="fragment">Supervision d'une clef ou d'un répertoire pour détecter un changement.</li>
                                                         <li class="fragment">Possibilité de fixer un verrou ou une durée de vie (TTL).</li>
                                                         <li class="fragment">Découverte des nœuds (static, etcd, dns).</li>
@@ -274,7 +274,7 @@ host coreos1 {
          <section>
                                         <section id="Fleet">
                                              <h2>Fleet</h2>
-					     <p> Fleet permet de gérer sur l'ensemble d'un cluster CoreOS, les fichiers systemd. 
+					     <p> Fleet permet de gérer, sur l'ensemble d'un cluster CoreOS, les fichiers systemd. 
 					     </p>
 					    <img src="images/Fleet-Overview.png" alt="etcd" style="background:none; border:none; box-shadow:none; " />
                                         </section>
@@ -283,21 +283,21 @@ host coreos1 {
 					     <p> La directive systemd <b>[X-Fleet]</b> permet d'étendre le fonctionnement des scripts systemd. 
 					     </p>
                                                 <ul>
-							<li><b>Global</b>: lance un <i>unit</i> systemd sur l'ensemble des nœuds.</li>
-							<li class="fragment"><b>MachineMetadata</b>: lance un  <i>unit</i> que sur certains membres du cluster (en fonction du Metadata) </li>
-							<li class="fragment"><b>Conflits</b>: permet d'exclure 2 <i>units</i> incompatibles tournent sur le même serveur. </li>
-							<li class="fragment"><b>MachineOf</b>: inversement, permet de lier 2 <i>units</i> ensemble sur un même serveur. </li>
+							<li><b>Global</b>&nbsp;: lance un <i>unit</i> systemd sur l'ensemble des nœuds.</li>
+							<li class="fragment"><b>MachineMetadata</b>&nbsp;: ne lance un  <i>unit</i> que sur certains membres du cluster (en fonction du Metadata).</li>
+							<li class="fragment"><b>Conflits</b>&nbsp;: permet d'exclure 2 <i>units</i> incompatibles pour éviter qu'ils ne tournent sur le même serveur. </li>
+							<li class="fragment"><b>MachineOf</b>&nbsp;: inversement, permet de lier 2 <i>units</i> ensemble sur un même serveur. </li>
                 	                        </ul>
                                         </section>
                                         <section id="Fleet-etcd">
                                              <h3>Fleet + etcd</h3>
                                                 <ul>
-							<li>Fleet a besoin d'une vue complète du cluster afin de répartir ces units sur l'ensemble des nœuds actif. </li>
+							<li>Fleet a besoin d'une vue complète du cluster pour répartir ces <i>units</i> sur l'ensemble des nœuds actifs. </li>
 							<ul>
-								<li> Quels units tournent sur le serveur?</li>
-								<li> Quelles machines fonctionnent dans le cluster?</li>
+								<li> Quels units tournent sur le serveur&nbsp;?</li>
+								<li> Quelles machines fonctionnent dans le cluster&nbsp;?</li>
 							</ul>
-							<li>Chaque fichier <i>unit</i>, chaque état des process, état des machines sont stockés dans etdc. </li>
+							<li>Chaque fichier <i>unit</i>, chaque état des process, état des machines est stocké dans etdc. </li>
                 	                        </ul>
                                         </section>
                                         <section id="Fleetctl-list-machines">
@@ -313,7 +313,7 @@ c93c01c0...     10.0.0.24    location=dsi,plateform=kvm,version=681.0.0
 					     </pre>
                                         </section>
                                         <section id="Fleet-unit">
-                                             <h3>Exemple service Global: cadvisor.service</h3>
+                                             <h3>Exemple service Global : cadvisor.service</h3>
 					     <pre>
 [Unit]
 Description=Google Container Advisor
@@ -403,7 +403,7 @@ Triggered global unit cadvisor.service stop
                                         <section id="util-12factor-codebase">
                                             <h3>Codebase</h3>
                                                 <ul>
-                                                        <li >Tout code doit être géré par un logiciel de suivie de version (git, mercurial, ...) </li>
+                                                        <li >Tout code doit être géré par un logiciel de suivi de version (git, mercurial, ...).</li>
                                                         <li >Une application = code source </li>
                 	                        </ul>
                                         </section>
@@ -411,8 +411,8 @@ Triggered global unit cadvisor.service stop
 			                    <h3>Dependencies</h3>
                                                 <ul>
                                                         <li >Toutes les dépendances doivent être clairement précisées.</li>
-                                                        <li >Le système cible n'est pas sensé contenir de programme pré-installé. </li>
-                                                        <li >Pas de dépendances implicite.</li>
+                                                        <li >Le système cible n'est pas censé contenir de programme pré-installé. </li>
+                                                        <li >Pas de dépendances implicites.</li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-config">
@@ -426,23 +426,23 @@ Triggered global unit cadvisor.service stop
                                         <section id="util-12factor-backing">
 						<h3>Backing Services</h3>
                                                 <ul>
-                                                        <li >Un <i>backing service </i> est une ressource externe au conteneur (base mysql, smtp, activemq, memcache...)</li>
+                                                        <li >Un <i>backing service </i> est une ressource externe au conteneur (base mysql, smtp, activemq, memcache,&nbsp;...).</li>
                                                         <li >L'accès à ces ressources doit être passé en paramètre.</li>
-							<li >Pas de distinction entre les services locaux et distant.</li>
+							<li >Pas de distinction entre les services locaux et distants.</li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-build">
                                             <h3>Build, release, run</h3>
                                                 <ul>
-                                                        <li >On recrée l'application et l'environnement avant chaque déploiement d'une nouvelle version.</li>
-                                                        <li >Aucune modification n'est apporté sur l'application déployée. </li>
-                                                        <li >Chaque version déployée a un numéro de version unique (timestamp, numero de commit, ...) </li>
+                                                        <li >On recrée l'application et l'environnement avant tout déploiement d'une nouvelle version.</li>
+                                                        <li >Aucune modification n'est apportée sur l'application déployée. </li>
+                                                        <li >Chaque version déployée a un numéro de version unique (timestamp, numero de commit, ...).</li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-process">
                                             <h3>Processes</h3>
                                                 <ul>
-                                                        <li >L'application est exécutée dans l'environnement d'exécution en tant que un ou plusieurs processus.</li>
+                                                        <li >L'application est exécutée dans l'environnement d'exécution en tant qu'un ou plusieurs processus.</li>
 							<li >Toutes les données doivent être stockées dans une ressource externe (base de données).</li>
                                                         <li >Les variables de sessions utilisateurs ne doivent jamais être stockées localement. </li>
                 	                        </ul>
@@ -475,7 +475,7 @@ Triggered global unit cadvisor.service stop
                                                         <li >Le développeur doit pouvoir déployer rapidement le code qu'il vient de finir d'écrire.</li>
                                                         <li >Le développeur doit être plus proche du déploiement (DevOps).</li>
                                                         <li >Maintenir le développement et la production aussi semblables que possible en utilisant les mêmes outils.</li>
-                                                        <li >Éviter de prendre des backends différents en prod et en dev (ex: base de données, ...) pour éviter les surprises en production.</li>
+                                                        <li >Éviter de prendre des backends différents en prod et en dev (ex: base de données, ...) pour limiter les surprises en production.</li>
                 	                        </ul>
                                         </section>
                                         <section id="util-12factor-logs">
@@ -489,19 +489,19 @@ Triggered global unit cadvisor.service stop
                                             <h3>Admin process</h3>
                                                 <ul>
                                                         <li >Les commandes d'administration doivent s'exécuter dans un environnement identique aux autres processus d'exploitation.</li>
-							<li >Même conteneur, même variables d'environnement, mais en mode interactif.</li>
+							<li >Même conteneur, mêmes variables d'environnement, mais en mode interactif.</li>
                 	                        </ul>
                                         </section>
                                         <section id="mircoservice">
                                             <h2>12-factors c'est bien mais...</h2>
-                                            <h3>... Comment le mettre en oeuvre de façon efficace.</h3>
+                                            <h3>... Comment les mettre en œuvre de façon efficace.</h3>
                                         </section>
                                         <section id="mircoservice-solution">
                                             <h3>Les Micro-services</h3>
 					    <p>Un système distribué basé sur des micro-services qui communiquent via des files de messages.</p>
 					    <ul>
 						    <li>Beaucoup de Micro-services plutôt qu'un programme monolithique.</li>
-						    <li>Chaque Micro-service fait une seule chose mais le fait bien (Philosophie Unix).</li>
+						    <li>Chaque Micro-service fait une seule chose mais la fait bien (Philosophie Unix).</li>
 						    <li>Les Micro-services sont déployés indépendamment.</li>
 						    <li>Ils communiquent en utilisant des files de messages (ex AMQP).</li>
 					    </ul>
@@ -516,34 +516,34 @@ Triggered global unit cadvisor.service stop
                                             <h3>Avantages de la solution</h3>
 					    <ul>
 						    <li class="fragment">La perte d'un serveur est transparente pour l'utilisateur.</li>
-						    <li class="fragment">Le système d'exploitation sécurisé et optimiser pour docker.</li>
+						    <li class="fragment">Le système d'exploitation est sécurisé et optimisé pour docker.</li>
 						    <li class="fragment">Moins de 5 minutes pour installer un nouveau serveur CoreOS.</li>
-						    <li class="fragment">Quelques secondes pour déployer une nouvelle applications.</li>
+						    <li class="fragment">Quelques secondes pour déployer une nouvelle application.</li>
 						    <li class="fragment">Mise à jour d'un CoreOS = un reboot</li>
 					    </ul>
                                         </section>
                                         <section id="MiseEnProd-constat">
                                             <h3>Constat</h3>
                                                 <ul>
-                                                        <li class="fragment">Actuellement peu d'applications de notre SI sont 12factor.</li>
-                                                        <li class="fragment">Fleet est un outil simple et efficace, mais l'intégration dans notre SI nécessite le développement de quelques outils complémentaires.</li>
-                                                        <li class="fragment">Des solutions plus complètes tel que Kubernetes ou Mesos permettent de gérer des conteneurs sur des miliers de serveurs CoreOS.</li>
+                                                        <li class="fragment">Actuellement peu d'applications de notre SI sont 12&nbsp;factors.</li>
+                                                        <li class="fragment">Fleet est un outil simple et efficace, mais son intégration dans notre SI nécessite le développement de quelques outils complémentaires.</li>
+                                                        <li class="fragment">Des solutions plus complètes telles que Kubernetes ou Mesos permettent de gérer des conteneurs sur des milliers de serveurs CoreOS.</li>
                                                         <li class="fragment">De nombreux outils de répartition de charge (lancés dans des conteneurs) sont capables d'interroger etcd pour se reconfigurer automatiquement.</li>
                 	                        </ul>
                                         </section>
                                         <section id="NouveauProjet">
                                             <h3>Par où commencer ?</h3>
                                                 <ul>
-                                                        <li class="fragment">Nouveaux projets</li>
-                                                        <li class="fragment">Projet de Desktop as a Service en cour de développement.</li>
+                                                        <li class="fragment">Nouveaux projets.</li>
+                                                        <li class="fragment">Projet de Desktop as a Service en cours de développement.</li>
                                                         <li class="fragment">Adapter les développements internes.</li>
                 	                        </ul>
                                         </section>
          </section>
        <!-- ########################################################################################## -->
          <section>
-                                        <section id="section">
-                                            <h1>Questions ?</h1>
+                                        <section id="question">
+                                            <h1>Questions&nbsp;?</h1>
                                         </section>
          </section>
         <!-- ########################################################################################## -->
