@@ -54,7 +54,7 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
+				<section id="debut">
                                         <img src="images/CoreOS.svg" style="background:none; border:none; box-shadow:none;" />
 					<!--<h1>Core<span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h1>-->
 					<h3>Du concept à la mise en production</h3>
@@ -74,7 +74,7 @@
 					      <li>Etcd</li>
 					      <li>Fleet</li>
                                               <li>Quel type d'application?</li>
-                                              <li>Outils annexes</li>
+                                              <li>Mise en production</li>
                                           </ol>
                                 </section>
 
@@ -85,15 +85,15 @@
 						<h2>Présentation de <img src="images/CoreOS.svg" alt="CoreOS" style="background:none; border:none; box-shadow:none; width:50%;" /></h2>
 					</section>
                                         <section id="CoreOS-system">
-                                            <h3>Comparaison entre un Hyperviseur et CoreOS </h3>
+						<h3>Comparaison entre un Hyperviseur et <b>Core</b><span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span> </h3>
 					    <img src="images/CoreOS-vs-Hypervisor.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:150%;" />
                                         </section>
                                         <section id="CoreOS-system">
-                                            <h3>Briques CoreOS</h3>
+						<h3>Briques <b>Core</b><span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h3>
 					    <img src="images/CoreOS-system.svg" alt="etcd" style="background:none; border:none; box-shadow:none; width:80%;" />
                                         </section>
                                         <section id="CoreOS-archi">
-                                            <h3>Architecture CoreOS</h3>
+						<h3>Architecture <b>Core</b><span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h3>
 					    <img src="images/Three-Tier-Webapp.png" alt="etcd" style="background:none; border:none; box-shadow:none; " />
                                         </section>
 					<section id="CoreOS-Docker">
@@ -104,7 +104,7 @@
        <!-- ########################################################################################## -->
          <section>
                                         <section id="CloudInit">
-                                            <h2>CoreOS Cloud-init</h2>
+						<h2><b>Core</b><span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span> Cloud-init</h2>
 					    <h3>Ou comment installer vos serveurs CoreOS sans rien installer.</h3>
                                         </section>
                                         <section id="CloudInit-config">
@@ -161,13 +161,12 @@ host coreos1 {
     "coreos_autologin": "tty1",
     "rootfstype": "btrfs",
     "root": "LABEL=ROOT",
-    "sshkey": "coreos",
     "version": "681.0.0"
 }
 					    </pre>
                                         </section>
-                                        <section id="CloudInit-channel">
-						<h3>Channels CoreOS</h3>
+                                         <section id="CloudInit-channel">
+						<h3>Channels <b>Core</b><span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h3>
                                                 <table><thead>
 							    <tr>
 								    <th>Stable</th>
@@ -368,7 +367,7 @@ Triggered global unit cadvisor.service stop
         ########################################################################################## -->
          <section>
                                         <section id="utilisation">
-                                            <h2>CoreOS OK, mais pour quel type d'application</h2>
+						<h2><b>Core</b><span style="color:#f35b69">O</span><span style="color:#6d9eeb">S</span></h2><h1>OK</h1><h3> mais pour quel type d'application</h3>
                                         </section>
 			          <section id="util-twelvefactor">
 			             <h3>The Twelve Factors</h3>
@@ -427,7 +426,7 @@ Triggered global unit cadvisor.service stop
                                         <section id="util-12factor-backing">
 						<h3>Backing Services</h3>
                                                 <ul>
-                                                        <li >Un <i>backing service </i> est une ressource accessible du réseau (base mysql, smtp, activemq, memcache...)</li>
+                                                        <li >Un <i>backing service </i> est une ressource externe au conteneur (base mysql, smtp, activemq, memcache...)</li>
                                                         <li >L'accès à ces ressources doit être passé en paramètre.</li>
 							<li >Pas de distinction entre les services locaux et distant.</li>
                 	                        </ul>
@@ -501,7 +500,7 @@ Triggered global unit cadvisor.service stop
                                             <h3>Les Micro-services</h3>
 					    <p>Un système distribué basé sur des micro-services qui communiquent via des files de messages.</p>
 					    <ul>
-						    <li>Plein de Micro-services plutôt qu'un programme monolithique.</li>
+						    <li>Beaucoup de Micro-services plutôt qu'un programme monolithique.</li>
 						    <li>Chaque Micro-service fait une seule chose mais le fait bien (Philosophie Unix).</li>
 						    <li>Les Micro-services sont déployés indépendamment.</li>
 						    <li>Ils communiquent en utilisant des files de messages (ex AMQP).</li>
@@ -510,11 +509,41 @@ Triggered global unit cadvisor.service stop
 		  </section>
        <!-- ########################################################################################## -->
          <section>
-                                        <section>
-                                            <h2>Outils annexes</h2>
+                                        <section id="MiseEnProd">
+                                            <h2>Mise en production</h2>
+                                        </section>
+                                        <section id="MiseEnProd-avantage">
+                                            <h3>Avantages de la solution</h3>
+					    <ul>
+						    <li class="fragment">La perte d'un serveur est transparente pour l'utilisateur.</li>
+						    <li class="fragment">Le système d'exploitation sécurisé et optimiser pour docker.</li>
+						    <li class="fragment">Moins de 5 minutes pour installer un nouveau serveur CoreOS.</li>
+						    <li class="fragment">Quelques secondes pour déployer une nouvelle applications.</li>
+						    <li class="fragment">Mise à jour d'un CoreOS = un reboot</li>
+					    </ul>
+                                        </section>
+                                        <section id="MiseEnProd-constat">
+                                            <h3>Constat</h3>
                                                 <ul>
-                                                        <li class="fragment"><b>A</b>: </li>
+                                                        <li class="fragment">Actuellement peu d'applications de notre SI sont 12factor.</li>
+                                                        <li class="fragment">Fleet est un outil simple et efficace, mais l'intégration dans notre SI nécessite le développement de quelques outils complémentaires.</li>
+                                                        <li class="fragment">Des solutions plus complètes tel que Kubernetes ou Mesos permettent de gérer des conteneurs sur des miliers de serveurs CoreOS.</li>
+                                                        <li class="fragment">De nombreux outils de répartition de charge (lancés dans des conteneurs) sont capables d'interroger etcd pour se reconfigurer automatiquement.</li>
                 	                        </ul>
+                                        </section>
+                                        <section id="NouveauProjet">
+                                            <h3>Par où commencer ?</h3>
+                                                <ul>
+                                                        <li class="fragment">Nouveaux projets</li>
+                                                        <li class="fragment">Projet de Desktop as a Service en cour de développement.</li>
+                                                        <li class="fragment">Adapter les développements internes.</li>
+                	                        </ul>
+                                        </section>
+         </section>
+       <!-- ########################################################################################## -->
+         <section>
+                                        <section id="section">
+                                            <h1>Questions ?</h1>
                                         </section>
          </section>
         <!-- ########################################################################################## -->
